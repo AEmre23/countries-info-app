@@ -2,7 +2,7 @@
 function App() {
   return (
     <div className="App">
-      Emre
+      Emre ALTUNKAYA
     </div>
   );
 }
