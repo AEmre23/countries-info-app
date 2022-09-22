@@ -1,3 +1,35 @@
-body {
-  margin: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 15px;
+  }
+  @media (max-width:475px){
+  .scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 10px;
+    }
+  }
+  .scrollbar::-webkit-scrollbar-track {
+    background: white;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 100vh;
+    border: 3px solid #f6f7ed;
+  }
+  .scrollbardark::-webkit-scrollbar-track {
+    background: #202C37;
+  }
+
+  .scrollbardark::-webkit-scrollbar-thumb {
+    background: white;
+    border-radius: 100vh;
+    border: 3px solid #f6f7ed;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #c0a0b9;
+  }
 }
