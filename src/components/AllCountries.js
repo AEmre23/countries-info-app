@@ -1,18 +1,20 @@
-import React,{useContext, useState} from 'react'
+import React, { useContext, useState, useRef } from 'react'
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { CountriesContext } from '../contexts/CountriesContext'
 import { Link } from "react-router-dom";
 import {Commify} from '../functions/Commify.js'
 
 
 const AllCountries = () => {
-  const { countries, setCountries } = useContext(CountriesContext)
+  const { countries } = useContext(CountriesContext)
+  const [parent] = useAutoAnimate()
 
   return (
     <div className="flex justify-center items-center mb-4">
-      <div className="flex flex-wrap mobile:justify-center mobile:gap-8 gap-3 justify-between gap-y-20 w-11/12 py-6">
-        {countries.map((eachCountry,index) => {
+      <div ref={parent} className="flex flex-wrap mobile:justify-center mobile:gap-8 gap-[calc(20%_/_3)] gap-y-20 w-11/12 py-6">
+        {countries.map((eachCountry) => {
           return (
-          <div key={index} className="overflow-hidden rounded-t-lg flex w-1/5 mobile:w-auto  cursor-pointer justify-center items-start shadow-xl hover:scale-105 transition-all bg-white dark:bg-darkElbg">
+          <div key={eachCountry.cca3} className="overflow-hidden rounded-t-lg flex w-1/5 mobile:w-auto  cursor-pointer justify-center items-start shadow-xl hover:scale-105 transition-all bg-white dark:bg-darkElbg">
             <Link to={eachCountry.cca3}>
             <div className="flex flex-col justify-between">
               <div className="flex items-end justify-center shadow-lg">

@@ -14,12 +14,14 @@ const CountryDetail = () => {
 
   let languages = Object.values(chosenCountry.languages)
   let nativeNames = Object.values(chosenCountry.name.nativeName)
-  let currencies = Object.values(chosenCountry.currencies)
-
+  let currencies = null
   let allCurrencies = []
-  currencies.forEach((each) => {
-    allCurrencies.push(each.name)
-  })
+  if (chosenCountry.currencies) {
+    currencies = Object.values(chosenCountry.currencies)
+    currencies.forEach((each) => {
+      allCurrencies.push(each.name)
+    })
+  }
 
   return (
     <>

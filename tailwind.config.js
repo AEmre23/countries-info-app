@@ -20,5 +20,7 @@ module.exports = {
       'bigscreen': {'min':'1680px'},
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
