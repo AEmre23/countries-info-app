@@ -12,7 +12,7 @@ function App() {
   return (
     <CountryProvider>
       <ThemeProvider>
-        <div className="min-h-screen text-lightmodetxt bg-lightmodebg dark:bg-darkmodebg dark:text-white transition-all duration-700 max-h-screen mobile:max-h-auto overflow-y-auto mobile:overflow-y-visible overflow-x-hidden scrollbar dark:scrollbardark">
+        <div className="min-h-screen text-lightmodetxt bg-lightmodebg dark:bg-darkmodebg dark:text-white transition-all duration-300 max-h-screen mobile:max-h-auto overflow-y-auto mobile:overflow-y-visible overflow-x-hidden scrollbar dark:scrollbardark">
           <Header />
           <Routes>
             <Route path="/" element={<Main />} />

@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
 import { useParams,useNavigate } from 'react-router-dom'
 import { CountriesContext } from '../contexts/CountriesContext'
 import { Commify } from '../functions/Commify'
@@ -7,10 +8,12 @@ import BorderFinder from '../components/BorderFinder'
 
 
 const CountryDetail = () => {
-  const { countries, setCountries,originArray,setOriginArray } = useContext(CountriesContext)
+  const { originArray } = useContext(CountriesContext)
   const navigate = useNavigate();
   const { id } = useParams();
-  let chosenCountry = originArray.find((selected) => selected.cca3 == id)
+
+
+  let chosenCountry = originArray.find((selected) => selected.cca3 === id)
 
   let languages = Object.values(chosenCountry.languages)
   let nativeNames = Object.values(chosenCountry.name.nativeName)

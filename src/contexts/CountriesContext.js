@@ -6,7 +6,8 @@ export const CountriesContext = createContext();
 
 export const CountryProvider = (props) => {
   const [countries, setCountries] = useState([]);
-  const [originArray,setOriginArray] = useState([])
+  const [originArray, setOriginArray] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
   const [loading,setLoading] = useState(true)
 
   const apiEndPoint = 'https://restcountries.com/v3.1/all'
@@ -23,7 +24,7 @@ export const CountryProvider = (props) => {
   },[])
 
   return (
-    <CountriesContext.Provider value={{countries, setCountries,originArray,setOriginArray}}>
+    <CountriesContext.Provider value={{countries, setCountries,originArray,setOriginArray,currentPage, setCurrentPage}}>
       {loading &&
       <div>
         <div className="fixed h-screen z-10 w-full bg-black opacity-20 dark:bg-white"></div>

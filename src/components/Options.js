@@ -3,9 +3,8 @@ import { CountriesContext } from '../contexts/CountriesContext'
 import { ImSearch } from 'react-icons/im'
 import { ImCancelCircle } from 'react-icons/im'
 import { AiOutlineDown } from 'react-icons/ai'
-
 const Options = () => {
-  const { countries, setCountries, originArray } = useContext(CountriesContext)
+  const { countries, setCountries, originArray, setCurrentPage } = useContext(CountriesContext)
   const [counter,setCounter] = useState(0)
   const [filterWord, setFilterWord] = useState('')
   const [filterRegion, setFilterRegion] = useState('')
@@ -15,6 +14,7 @@ const Options = () => {
   const sort = useRef()
 
   useEffect(() => {
+    setCurrentPage(1)
     if (filterWord.length > 0) {
       setCountries(countries.filter((each) => each.name.common.toLowerCase().includes(filterWord.toLowerCase().trim()) ))
     }
