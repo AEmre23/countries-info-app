@@ -24,7 +24,7 @@ const AllCountries = () => {
     if (e.currentTarget.value === '1') {
       if (currentPage !== 1) setCurrentPage(preVal=> preVal - 1)
     }
-    else if(e.currentTarget.value === '2') {
+    else if (e.currentTarget.value === '2') {
       if(currentPage !== pageNumbers.length) setCurrentPage(preVal => preVal + 1)
     }
   }
@@ -34,7 +34,7 @@ const AllCountries = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center pb-2 items-center">
+    <div className="flex flex-col justify-center items-center">
       <div ref={parent} className="flex flex-wrap pb-16 mobile:pb-12 min-h-max mobile:justify-center mobile:gap-8 gap-[calc(20%_/_3)] gap-y-20 w-11/12 py-6">
         {newDataMap.map((eachCountry) => {
           return (
@@ -63,16 +63,18 @@ const AllCountries = () => {
       {pageNumbers.length > 1 &&
       <>
         <div className="bg-slate-200  dark:bg-slate-400 opacity-90 bottom-0 p-3 mobile:pb-6 flex mobile:flex-wrap items-center gap-2 border-t-2 border-black w-full justify-center">
-          <button value='1' onClick={navigatePage} className="border-2 mobile:hidden cursor-pointer border-black dark:border-gray-200 rounded-lg py-1 px-4 transition-all active:scale-95 mr-2">Previous</button>
+          <button value='1' onClick={navigatePage} className="border-2 cursor-pointer border-black dark:border-gray-200 rounded-lg py-1 px-4 transition-all active:scale-95 mr-2">Previous</button>
           {pageNumbers.map((each) => (
             <div onClick={(e)=>setCurrentPage(Number(e.target.innerText))} className={` ${each === currentPage && 'bg-blue-500 text-white'} border mobile:hidden cursor-pointer border-gray-700 py-1 px-2 rounded-xl transition-all active:scale-95`} key={each}>{each}</div>
           ))}
-          <select onChange={(e)=>setCurrentPage(Number(e.target.value))} className="hidden mobile:block ">
+          <select value={currentPage} onChange={(e)=>setCurrentPage(Number(e.target.value))} className="hidden mobile:block dark:bg-slate-400 dark:text-white dark:border-white  ">
           {pageNumbers.map((each) => (
-            <option key={each} value={each} className={`${each === currentPage && 'text-blue-500'}`}>{each}</option>
+            <option key={each} className="text-black ">{each}</option>
           ))}
           </select>
-          <button value='2' onClick={navigatePage} className="border-2 mobile:hidden cursor-pointer border-black dark:border-gray-200 rounded-lg py-1 px-4 transition-all active:scale-95 ml-2 ">Next</button>
+          <span className="hidden mobile:block text-2xl">/</span>
+          <button value={pageNumbers.at(-1)} className="hidden mobile:block text-xl border border-gray-700 dark:border-white py-1 px-1 rounded-xl cursor-pointer" onClick={(e) => setCurrentPage(Number(e.target.value))}>{pageNumbers.at(-1)}</button>
+          <button value='2' onClick={navigatePage} className="border-2 cursor-pointer border-black dark:border-gray-200 rounded-lg py-1 px-4 transition-all active:scale-95 ml-2 ">Next</button>
         </div>
       </>
       }

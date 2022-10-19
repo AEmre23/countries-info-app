@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useContext } from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
 import { CountriesContext } from '../contexts/CountriesContext'
 import { Commify } from '../functions/Commify'
