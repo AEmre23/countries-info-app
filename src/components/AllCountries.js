@@ -5,20 +5,12 @@ import { Link } from "react-router-dom";
 import {Commify} from '../functions/Commify.js'
 
 
-const AllCountries = () => {
+const AllCountries = ({ filterWord }) => {
   const { countries,setCountries, originArray, currentPage, setCurrentPage } = useContext(CountriesContext)
   const [parent] = useAutoAnimate()
   const [dataPerPage, setDataPerPage] = useState(16)
   let lastDataIndex = currentPage * dataPerPage 
   let firstDataIndex = currentPage * dataPerPage - dataPerPage
-  let newDataMap = countries.slice(firstDataIndex, lastDataIndex)
-  
-
-
-  let pageNumbers = []
-  for (let x = 1; x <= Math.ceil(countries.length / dataPerPage); x++){
-    pageNumbers.push(x)
-  }
 
   const navigatePage = (e) => {
     if (e.currentTarget.value === '1') {
@@ -29,6 +21,19 @@ const AllCountries = () => {
     }
   }
 
+  let filtered= countries.filter((val) => {
+        if (filterWord === "") {
+          return val
+        }
+        else if (val.name.common.toLowerCase().includes(filterWord.toLowerCase().trim())) {
+          return val
+    }
+  }) 
+  let pageNumbers = []
+  for (let x = 1; x <= Math.ceil(filtered.length / dataPerPage); x++){
+    pageNumbers.push(x)
+  }
+
   useEffect(() => {
     setCountries(originArray)
   }, []);
@@ -36,7 +41,7 @@ const AllCountries = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <div ref={parent} className="flex flex-wrap pb-16 mobile:pb-12 min-h-max mobile:justify-center mobile:gap-8 gap-[calc(20%_/_3)] gap-y-20 w-11/12 py-6">
-        {newDataMap.map((eachCountry) => {
+        {filtered.slice(firstDataIndex, lastDataIndex).map((eachCountry) => {
           return (
           <div key={eachCountry.cca3} className="overflow-hidden rounded-t-lg flex w-1/5 mobile:w-auto  cursor-pointer justify-center items-start shadow-xl hover:scale-105 transition-all bg-white dark:bg-darkElbg">
             <Link to={eachCountry.cca3}>

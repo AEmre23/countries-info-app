@@ -2,10 +2,11 @@ import React, { useContext, useRef, useEffect, useState } from 'react'
 import { CountriesContext } from '../contexts/CountriesContext'
 import { ImSearch } from 'react-icons/im'
 import { ImCancelCircle } from 'react-icons/im'
-const Options = () => {
+
+const Options = ({filterWord, setFilterWord}) => {
   const { countries, setCountries, originArray, setCurrentPage } = useContext(CountriesContext)
   const [counter,setCounter] = useState(0)
-  const [filterWord, setFilterWord] = useState('')
+
   const [filterRegion, setFilterRegion] = useState('')
   const [sortCountry,setSortCountry] = useState('')
   const search = useRef()
@@ -14,9 +15,6 @@ const Options = () => {
 
   useEffect(() => {
     setCurrentPage(1)
-    if (filterWord.length > 0) {
-      setCountries(countries.filter((each) => each.name.common.toLowerCase().includes(filterWord.toLowerCase().trim())))
-    }
     if (filterWord.length === 0) {
       setCountries(originArray)
       select.current.value = 'DEFAULT'
@@ -57,11 +55,7 @@ const Options = () => {
   setCountries([...countries])
   }, [counter]);
   
-  const CountryFilter = (e) => {
-    if (e.key === "Backspace" || e.key === "Delete") {
-      setCountries(originArray)
-      select.current.value='DEFAULT'
-    }
+  const filterCountry = (e) => {
     setFilterWord(e.target.value) 
   }
   const filterRemover = () => {
@@ -83,7 +77,7 @@ const Options = () => {
         <div className="flex items-center rounded-md p-2 px-4 justify-between w-1/3 mobile:w-full mobile:px-3 dark:bg-darkElbg bg-white shadow-[rgba(100,_100,_111,_0.2)_0px_7px_29px_0px]">
           <div className="flex items-center w-full px-4 py-2 gap-6 mobile:gap-2 justify-start">
             <ImSearch />
-            <input onChange={CountryFilter} onKeyDown={CountryFilter} ref={search} className="p-1 border-none focus:ring-0 focus:outline-none w-full dark:bg-darkElbg" type='text' placeholder="Search for a country..." />
+            <input onChange={filterCountry} ref={search} className="p-1 border-none focus:ring-0 focus:outline-none w-full dark:bg-darkElbg" type='text' placeholder="Search for a country..." />
           </div>
           {filterWord.length>0 &&
           <ImCancelCircle onClick={filterRemover} className="cursor-pointer min-w-max" />
