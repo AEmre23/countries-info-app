@@ -14,8 +14,9 @@ const CountryDetail = () => {
 
   let chosenCountry = originArray.find((selected) => selected.cca3 === id)
 
-  let languages = Object.values(chosenCountry.languages)
-  let nativeNames = Object.values(chosenCountry.name.nativeName)
+  let languages = chosenCountry.languages ? Object.values(chosenCountry.languages) : ["No language"]
+  let nativeName = chosenCountry.name.nativeName ? Object.values(chosenCountry.name.nativeName) : chosenCountry.name.common
+  console.log(nativeName)
   let currencies = null
   let allCurrencies = []
   if (chosenCountry.currencies) {
@@ -46,7 +47,7 @@ const CountryDetail = () => {
             </div>
             <div className="flex mobile:flex-col gap-24 mobile:gap-4">
               <div className="flex w-1/2 mobile:w-full flex-col gap-3">
-                <div className=""><span className="font-semibold">Native Name:</span> {nativeNames[nativeNames.length-1].common}</div>
+                <div className=""><span className="font-semibold">Native Name:</span> {typeof(nativeName) !== "string" ? nativeName[0].common : nativeName}</div>
                 <div className=""><span className="font-semibold">Population:</span> {Commify(chosenCountry.population)}</div>
                 <div className=""><span className="font-semibold">Region:</span> {chosenCountry.region}</div>
                 <div className=""><span className="font-semibold">Sub Region:</span> {chosenCountry.subregion}</div>
