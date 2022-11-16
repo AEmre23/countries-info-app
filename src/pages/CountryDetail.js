@@ -8,6 +8,7 @@ import BorderFinder from '../components/BorderFinder'
 
 const CountryDetail = () => {
   const { originArray } = useContext(CountriesContext)
+  console.log(originArray);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -16,7 +17,7 @@ const CountryDetail = () => {
 
   let languages = chosenCountry.languages ? Object.values(chosenCountry.languages) : ["No language"]
   let nativeName = chosenCountry.name.nativeName ? Object.values(chosenCountry.name.nativeName) : chosenCountry.name.common
-  console.log(nativeName)
+
   let currencies = null
   let allCurrencies = []
   if (chosenCountry.currencies) {
