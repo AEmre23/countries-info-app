@@ -22,38 +22,36 @@ const Options = ({filterWord, setFilterWord}) => {
   }, [filterWord]);
 
   useEffect(() => {
-    console.log(filterRegion)
-    if (filterRegion == 'all') setCountries(originArray)
+    if (filterRegion === 'all') setCountries(originArray)
     else setCountries(originArray.filter((each) => each.region.toLowerCase() === filterRegion))
     setCounter(preVal=>preVal + 1)
   }, [filterRegion]);
 
   useEffect(() => {
     if (sortCountry === 'popAsc') {
-      setCountries(countries.sort((a, b) => {
+      setCountries(countries.slice().sort((a, b) => {
         if (a.population < b.population) return -1
         else return 1
       }))
     }
     else if (sortCountry === 'popDesc') {
-      setCountries(countries.sort((a, b) => {
+      setCountries(countries.slice().sort((a, b) => {
         if (a.population > b.population) return -1
         else return 1
       }))
     }
     else if (sortCountry === 'nameAsc') {
-      setCountries(countries.sort((a, b) => {
+      setCountries(countries.slice().sort((a, b) => {
         let aName = a.name.common, bName= b.name.common
         return aName.localeCompare(bName)
       }))
     }
     else if(sortCountry === 'nameDesc') {
-      setCountries(countries.sort((a, b) => {
+      setCountries(countries.slice().sort((a, b) => {
         let aName = a.name.common, bName= b.name.common
         return bName.localeCompare(aName)
       }))
     }
-  setCountries([...countries])
   }, [counter]);
   
   const filterCountry = (e) => {
