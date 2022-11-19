@@ -7,7 +7,7 @@ const Options = ({filterWord, setFilterWord}) => {
   const { countries, setCountries, originArray, setCurrentPage } = useContext(CountriesContext)
   const [counter,setCounter] = useState(0)
 
-  const [filterRegion, setFilterRegion] = useState('')
+  const [filterRegion, setFilterRegion] = useState("all")
   const [sortCountry,setSortCountry] = useState('')
   const search = useRef()
   const select = useRef()
@@ -22,7 +22,8 @@ const Options = ({filterWord, setFilterWord}) => {
   }, [filterWord]);
 
   useEffect(() => {
-    if (filterRegion === '' || filterRegion === 'all') setCountries(originArray)
+    console.log(filterRegion)
+    if (filterRegion == 'all') setCountries(originArray)
     else setCountries(originArray.filter((each) => each.region.toLowerCase() === filterRegion))
     setCounter(preVal=>preVal + 1)
   }, [filterRegion]);

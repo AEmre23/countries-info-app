@@ -17,7 +17,7 @@ import {Link} from 'react-router-dom'
     }
     return (
       lastArray.map((each, index) => (
-        <Link className="cursor-pointer transition-all hover:scale-105 " key={index} to={`/${each[0]}`}>
+        <Link className="cursor-pointer transition-all hover:scale-105 " key={index} to={`/detail/${each[0]}`}>
           <span className="border-2 px-2 py-1 shadow-md rounded-md dark:bg-darkElbg">{each[1]}</span>
         </Link>
       ))

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams,useNavigate } from 'react-router-dom'
 import { CountriesContext } from '../contexts/CountriesContext'
 import { Commify } from '../functions/Commify'
@@ -8,19 +8,17 @@ import BorderFinder from '../components/BorderFinder'
 
 const CountryDetail = () => {
   const { originArray } = useContext(CountriesContext)
-  console.log(originArray);
   const navigate = useNavigate();
   const { id } = useParams();
 
-
   let chosenCountry = originArray.find((selected) => selected.cca3 === id)
 
-  let languages = chosenCountry.languages ? Object.values(chosenCountry.languages) : ["No language"]
-  let nativeName = chosenCountry.name.nativeName ? Object.values(chosenCountry.name.nativeName) : chosenCountry.name.common
+  let languages = chosenCountry?.languages ? Object.values(chosenCountry.languages) : ["No language"]
+  let nativeName = chosenCountry?.name?.nativeName ? Object.values(chosenCountry.name.nativeName) : chosenCountry.name.common
 
   let currencies = null
   let allCurrencies = []
-  if (chosenCountry.currencies) {
+  if (chosenCountry?.currencies) {
     currencies = Object.values(chosenCountry.currencies)
     currencies.forEach((each) => {
       allCurrencies.push(each.name)
@@ -49,13 +47,13 @@ const CountryDetail = () => {
             <div className="flex mobile:flex-col gap-24 mobile:gap-4">
               <div className="flex w-1/2 mobile:w-full flex-col gap-3">
                 <div className=""><span className="font-semibold">Native Name:</span> {typeof(nativeName) !== "string" ? nativeName[0].common : nativeName}</div>
-                <div className=""><span className="font-semibold">Population:</span> {Commify(chosenCountry.population)}</div>
-                <div className=""><span className="font-semibold">Region:</span> {chosenCountry.region}</div>
-                <div className=""><span className="font-semibold">Sub Region:</span> {chosenCountry.subregion}</div>
-                <div className=""><span className="font-semibold">Capital:</span> {chosenCountry.capital}</div> 
+                <div className=""><span className="font-semibold">Population:</span> {Commify(chosenCountry?.population)}</div>
+                <div className=""><span className="font-semibold">Region:</span> {chosenCountry?.region}</div>
+                <div className=""><span className="font-semibold">Sub Region:</span> {chosenCountry?.subregion}</div>
+                <div className=""><span className="font-semibold">Capital:</span> {chosenCountry?.capital}</div> 
               </div>
               <div className="flex w-1/2 mobile:w-full flex-col gap-3">
-                <div className=""><span className="font-semibold">Top Level Domain:</span> {chosenCountry.tld}</div>
+                <div className=""><span className="font-semibold">Top Level Domain:</span> {chosenCountry?.tld}</div>
                 <div className=""><span className="font-semibold">Currencies: </span>
                   {allCurrencies.map((each,index) => (
                     index+1==allCurrencies.length ? <span key={index}>{each}</span> : <span key={index}>{each}, </span>

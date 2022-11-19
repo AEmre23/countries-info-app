@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 import {Commify} from '../functions/Commify.js'
 
 
-const AllCountries = ({ filterWord }) => {
-  const { countries,setCountries, originArray, currentPage, setCurrentPage } = useContext(CountriesContext)
+const AllCountries = ({ filterWord}) => {
+  const { countries, setCountries, originArray, currentPage, setCurrentPage } = useContext(CountriesContext)
+
   const [parent] = useAutoAnimate()
   const [dataPerPage, setDataPerPage] = useState(16)
   let lastDataIndex = currentPage * dataPerPage 
@@ -22,13 +23,14 @@ const AllCountries = ({ filterWord }) => {
   }
 
   let filtered= countries.filter((val) => {
-        if (filterWord === "") {
+        if (filterWord.length === 0) {
           return val
         }
         else if (val.name.common.toLowerCase().includes(filterWord.toLowerCase().trim())) {
           return val
     }
   }) 
+
   let pageNumbers = []
   for (let x = 1; x <= Math.ceil(filtered.length / dataPerPage); x++){
     pageNumbers.push(x)
@@ -44,7 +46,7 @@ const AllCountries = ({ filterWord }) => {
         {filtered.slice(firstDataIndex, lastDataIndex).map((eachCountry) => {
           return (
           <div key={eachCountry.cca3} className="overflow-hidden rounded-t-lg flex w-1/5 mobile:w-auto  cursor-pointer justify-center items-start shadow-xl hover:scale-105 transition-all bg-white dark:bg-darkElbg">
-            <Link to={eachCountry.cca3}>
+            <Link to={`/detail/${eachCountry.cca3}`}>
             <div className="flex flex-col justify-between">
               <div className="flex items-end justify-center shadow-lg">
                 <img className="w-96 h-44 rounded-t-lg" src={eachCountry.flags.png} alt='country-flag' />
